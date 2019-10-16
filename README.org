@@ -1,0 +1,74 @@
+#+TITLE: SIC Codes
+#+AUTHOR: Enrico Schumann
+
+* Installation
+
+The latest version of the package is available from
+[[http://enricoschumann.net/R/packages/SIC.codes/]]. You can install
+the package directly from within R:
+#+BEGIN_SRC R :eval never
+  install.packages('SIC.codes',
+                   repos = c('http://enricoschumann.net/R',
+                             getOption('repos')))
+#+END_SRC
+
+
+
+* Usage
+
+Look for specific SIC codes with =description_sic=.
+#+BEGIN_SRC R :colnames yes :results output :session *R* :exports both
+  library("SIC.codes")
+  description_sic("business")
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+     code                                                  description
+72     73                                            Business Services
+203   276                                      Manifold Business Forms
+395   615                                 Business Credit Institutions
+435   738                              Miscellaneous Business Services
+475   861                                        Business Associations
+787  2761                                      Manifold Business Forms
+1299 6153 Short-Term Business Credit Institutions, Except Agricultural
+1300 6159                   Miscellaneous business Credit Institutions
+1388 7389                  Business Services, Not Elsewhere Classified
+1455 8244                             Business and Secretarial Schools
+1465 8611                                        Business Associations
+1484 8748       Business Consulting Services, Not Elsewhere Classified
+#+end_example
+
+... or in Org format.
+
+#+BEGIN_SRC R :colnames yes :results output :session *R* :exports both
+  library("orgutils")
+  toOrg(description_sic("business"), row.names = FALSE)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+| code | description                                                  |
+|------+--------------------------------------------------------------|
+| 73   | Business Services                                            |
+| 276  | Manifold Business Forms                                      |
+| 615  | Business Credit Institutions                                 |
+| 738  | Miscellaneous Business Services                              |
+| 861  | Business Associations                                        |
+| 2761 | Manifold Business Forms                                      |
+| 6153 | Short-Term Business Credit Institutions, Except Agricultural |
+| 6159 | Miscellaneous business Credit Institutions                   |
+| 7389 | Business Services, Not Elsewhere Classified                  |
+| 8244 | Business and Secretarial Schools                             |
+| 8611 | Business Associations                                        |
+| 8748 | Business Consulting Services, Not Elsewhere Classified       |
+#+end_example
+
+Find the description of SIC codes with =sic_description=.
+#+BEGIN_SRC R :colnames yes :results output :session *R* :exports both
+  sic_description(c("9999", "1011"))
+#+END_SRC
+
+#+RESULTS:
+:                             9999         1011
+: "Nonclassifiable Establishments"  "Iron Ores"

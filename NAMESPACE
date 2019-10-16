@@ -1,0 +1,6 @@
+export(sic_description,
+       description_sic,
+       .SIC1,
+       .SIC2,
+       .SIC3,
+       .SIC4)

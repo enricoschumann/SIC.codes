@@ -1,0 +1,6 @@
+.es_keywords
+.git
+.gitignore
+README.org
+vignettes/auto/
+Scripts/

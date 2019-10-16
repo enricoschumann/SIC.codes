@@ -1,0 +1,4 @@
+2019-10-16  Enrico Schumann  <es@enricoschumann.net>
+
+	* functions.R (sic_description)
+	(description_sic): add functions
