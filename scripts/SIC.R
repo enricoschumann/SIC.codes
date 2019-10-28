@@ -63,10 +63,9 @@ for (i in 1:1100) {
 for (j in 1:4)
     ans[[j]] <- ans[[j]][1:row, ]
 
-## create large df
-.division__major_group <- data.frame(division = ans[[4]][[1]],
-                                     major_group = ans[[3]][[1]],
-                                     stringsAsFactors = FALSE)
+ans[[4]] <- data.frame(code = ans[[3]][[1]],
+                       description = paste(ans[[4]][[1]], ans[[4]][[2]]),
+                       stringsAsFactors = FALSE)
 
 ## uniquify, sort
 for (j in 1:4) {
@@ -83,23 +82,8 @@ for (j in 1:4) {
 .industry <- ans[[1]]
 
 
-dump(c(".division__major_group",
-       ".division", ".major_group", ".industry_group", ".industry"),
+dump(c(".division", ".major_group", ".industry_group", ".industry"),
      "~/Packages/SIC.codes/R/SIC-codes.R")
 
 library("formatR")
 formatR::tidy_file("~/Packages/SIC.codes/R/SIC-codes.R", width.cutoff = 30)
-
-## txt <- readLines("https://www.osha.gov/pls/imis/sic_manual.html")
-## ii <- grep("Major Group", txt)
-
-## major_groups <- data.frame(group = gsub(".*>Major Group ([0-9]+): (.*)<.*", "\\1", txt[ii]),
-##                            desc = gsub(".*>Major Group ([0-9]+): ([^<]+).*", "\\2", txt[ii]))
-
-## links <- paste0("https://www.osha.gov/pls/imis", "/",
-##                  gsub(".*href=\"(.*)\" title.*", "\\1", txt[ii]))
-
-## for (i in seq_along(major_groups)) {
-##     txt1 <- readLines(links[i])
-## }
-

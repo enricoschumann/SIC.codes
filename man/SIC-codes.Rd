@@ -39,5 +39,6 @@ sic_description(s, ...)
   add other packages
 }
 \examples{
-1+1  ## TODO
+sic_description(c("9198", "9199", "9999"))
+sic_description(c("9198", "9199", "9999"), type = "division")
 }

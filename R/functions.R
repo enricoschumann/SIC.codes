@@ -2,22 +2,34 @@
              major_group = .major_group,
              industry_group = .industry_group,
              industry = .industry)
-            
+
 sic_description <- function(s, type = "industry", ...) {
     ## map sic code to description
 
+    s <- as.character(s)
     ans <- rep(NA, length(s))
     names(ans) <- s
-    ii <- match(s, .SIC$code, nomatch = 0)
-    ans[ii>0] <- .SIC$description[ii]
+
+    if (type == "industry_group")
+        s <- substr(s, 1, 3)
+    else if (type == "major_group")
+        s <- substr(s, 1, 2)
+    else if (type == "division") {
+        s <- substr(s, 1, 2)
+    }
+    ii <- match(s,
+                .SIC[[type]]$code,
+                nomatch = 0L)
+    ans[ii > 0L] <- paste(.SIC[[type]]$code[ii],
+                          .SIC[[type]]$description[ii])
     ans
 }
 
-description_sic <- function(pattern, ...,
-                            ignore.case = TRUE) {
+description_sic <- function(pattern, type = "industry",
+                            ..., ignore.case = TRUE) {
     ## map descriptions to sic code
 
-    L <- grepl(pattern, .SIC$description, ...,
+    L <- grepl(pattern, .SIC[[type]]$description, ...,
                ignore.case = ignore.case)
-    .SIC[L, ]
+    .SIC[[type]][L, ]
 }
