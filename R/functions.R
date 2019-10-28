@@ -1,11 +1,11 @@
-.SIC <- rbind(.SIC1, .SIC2, .SIC3, .SIC4,
-              stringsAsFactors = FALSE)
-
-sic_description <- function(s, ...) {
+.SIC <- list(division = .division,
+             major_group = .major_group,
+             industry_group = .industry_group,
+             industry = .industry)
+            
+sic_description <- function(s, type = "industry", ...) {
     ## map sic code to description
 
-    if (!is.character(s))
-        stop(sQuote("s"), "must be character")
     ans <- rep(NA, length(s))
     names(ans) <- s
     ii <- match(s, .SIC$code, nomatch = 0)

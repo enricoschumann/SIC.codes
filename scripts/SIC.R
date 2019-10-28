@@ -63,6 +63,10 @@ for (i in 1:1100) {
 for (j in 1:4)
     ans[[j]] <- ans[[j]][1:row, ]
 
+## create large df
+.division__major_group <- data.frame(division = ans[[4]][[1]],
+                                     major_group = ans[[3]][[1]],
+                                     stringsAsFactors = FALSE)
 
 ## uniquify, sort
 for (j in 1:4) {
@@ -73,13 +77,18 @@ for (j in 1:4) {
     row.names(ans[[j]]) <- NULL
 }
 
-.SIC1 <- ans[[4]]
-.SIC2 <- ans[[3]]
-.SIC3 <- ans[[2]]
-.SIC4 <- ans[[1]]
+.division <- ans[[4]]
+.major_group <- ans[[3]]
+.industry_group <- ans[[2]]
+.industry <- ans[[1]]
 
-dump(c(".SIC1", ".SIC2", ".SIC3", ".SIC4"),
+
+dump(c(".division__major_group",
+       ".division", ".major_group", ".industry_group", ".industry"),
      "~/Packages/SIC.codes/R/SIC-codes.R")
+
+library("formatR")
+formatR::tidy_file("~/Packages/SIC.codes/R/SIC-codes.R", width.cutoff = 30)
 
 ## txt <- readLines("https://www.osha.gov/pls/imis/sic_manual.html")
 ## ii <- grep("Major Group", txt)
