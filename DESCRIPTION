@@ -2,7 +2,7 @@ Package: SIC.codes
 Type: Package
 Title: Loop Up and Search for SIC Codes
 Version: 0.1-0
-Date: 2019-10-14
+Date: 2019-11-05
 Maintainer: Enrico Schumann <es@enricoschumann.net>
 Authors@R: person(given = "Enrico", family = "Schumann",
                   role  = c("aut", "cre"),

@@ -3,7 +3,8 @@
              industry_group = .industry_group,
              industry = .industry)
 
-sic_description <- function(s, type = "industry", ...) {
+sic_description <- function(s, type = "industry",
+                            paste.code = TRUE, ...) {
     ## map sic code to description
 
     s <- as.character(s)
@@ -20,8 +21,12 @@ sic_description <- function(s, type = "industry", ...) {
     ii <- match(s,
                 .SIC[[type]]$code,
                 nomatch = 0L)
-    ans[ii > 0L] <- paste(.SIC[[type]]$code[ii],
-                          .SIC[[type]]$description[ii])
+    if (paste.code) {
+        ans[ii > 0L] <- paste(.SIC[[type]]$code[ii],
+                              .SIC[[type]]$description[ii])
+    } else {
+        ans[ii > 0L] <- .SIC[[type]]$description[ii]
+    }
     ans
 }
 

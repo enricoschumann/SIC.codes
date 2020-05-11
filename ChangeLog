@@ -1,4 +1,10 @@
+2019-11-05  Enrico Schumann  <es@enricoschumann.net>
+
+        * R/functions.R (sic_description): add argument
+        'paste.code'. If TRUE, paste numeric code to
+        description.
+
 2019-10-16  Enrico Schumann  <es@enricoschumann.net>
 
-	* functions.R (sic_description)
-	(description_sic): add functions
+        * functions.R (sic_description)
+        (description_sic): add functions
