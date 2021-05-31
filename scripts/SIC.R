@@ -3,10 +3,7 @@
 ## library("htmltab")
 ## codes <- htmltab("https://www.sec.gov/info/edgar/siccodes.htm")
 
-
-
-## OSHA
-## industries <- industry_groups <- major_groups <- divisions <-
+library("textutils")
 
 ans <- list(
     data.frame(code = character(2000),
@@ -27,7 +24,7 @@ names(ans) <- c("industries",
                 "divisions")
 
 patterns <- c(
-    "<h2>Description for ([0-9]+): +([^<]+)<.*",
+    "<h.>Description for ([0-9]+): +([^<]+)<.*",
     ".*Industry Group ([0-9]+): ([^<]+).*",
     ".*Major Group ([0-9]+): ([^<]+).*",
     ".*>Division ([A-M]): +([^<]+).*"
@@ -35,15 +32,14 @@ patterns <- c(
 
 row <- 0
 
-for (i in 1:1100) {
+for (i in 1:9999) {
     message(i, "...", appendLF = FALSE)
     flush.console()
-
-    txt <- readLines(paste0("https://www.osha.gov/pls/imis/",
-                            "sic_manual.display?id=", i,
-                            "&tab=description"))
-
-    if (any(grepl("SIC Division Structure", txt))) {
+    u <- url(paste0("https://www.osha.gov/sic-manual/", sprintf("%04d", i)))
+    txt <- try(readLines(u), silent = TRUE)
+    close(u)
+    Sys.sleep(0.5)
+    if (inherits(txt, "try-error")) {
         message("[skip]")
         next
     }
@@ -76,6 +72,9 @@ for (j in 1:4) {
     row.names(ans[[j]]) <- NULL
 }
 
+for (j in 1:4)
+    ans[[j]][["description"]] <- textutils::HTMLdecode(ans[[j]][["description"]])
+
 .division <- ans[[4]]
 .major_group <- ans[[3]]
 .industry_group <- ans[[2]]
@@ -87,3 +86,4 @@ dump(c(".division", ".major_group", ".industry_group", ".industry"),
 
 library("formatR")
 formatR::tidy_file("~/Packages/SIC.codes/R/SIC-codes.R", width.cutoff = 30)
+
