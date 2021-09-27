@@ -38,3 +38,7 @@ description_sic <- function(pattern, type = "industry",
                ignore.case = ignore.case)
     .SIC[[type]][L, ]
 }
+
+sic_French <- function(s, industries = 12, ...) {
+
+}
